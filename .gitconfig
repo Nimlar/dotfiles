@@ -1,0 +1,18 @@
+[gui]
+
+[color]
+	ui = auto
+[merge]
+	tool = meld
+[diff]
+	tool = meld
+[core]
+	excludesfile = /home/toromano/.config/git/ignore
+	editor = vim
+
+[include]
+	path=~/.config/git/aliases
+	path=~/.config/git/localdefs
+
+[push]
+	default = simple

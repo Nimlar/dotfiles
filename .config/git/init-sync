@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ -d .git -a "$PWD" != "$HOME" ]; then # This is a first run
+	# At first run, we're run from the git dir, unconfigured
+
+	# we use the current directory .git DB
+	export GIT_DIR=$PWD/.git
+	# we remove all file knwon by git from .sync/ (=$PWD) directory
+	git ls-files HEAD . |xargs rm -r
+	# we change the git workdir to $HOME
+	git config --add core.worktree $HOME
+	# we recreate all missing/updated file
+	git checkout -f
+else
+	export GIT_DIR=$HOME/.sync/.git
+fi
+
+cd $HOME
+git submodule init
+git submodule update

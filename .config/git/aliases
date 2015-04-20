@@ -1,0 +1,12 @@
+#alias from
+#http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
+[alias]
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%an]" --decorate
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%an]" --decorate --numstat
+
+	lnc = log --pretty=format:"%h\\ %s\\ [%an]"
+
+	lasttag = describe --tags --abbrev=0
+	lt = describe --tags --abbrev=0
+	diffall = difftool -d
+
