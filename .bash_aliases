@@ -39,5 +39,5 @@ tag() {
    fi
 }
 
-# manageemnt of .files in git
+# management of .files in git
 alias .git="GIT_DIR=~/.sync/.git git"
