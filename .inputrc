@@ -14,7 +14,12 @@
 "\e[8~":end-of-line
 
 
+# page up/page down
 "\e[5~": history-search-backward
 "\e[6~": history-search-forward
+# alt-up alt-down
+"\e[1;3A": history-search-backward
+"\e[1;3B": history-search-forward
+
 
 set bell-style none
