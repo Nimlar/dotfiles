@@ -1,3 +1,12 @@
+#default aliases
+
+# Some example alias instructions
+alias less='less -r -i'
+# alias rm='rm -i'
+# alias whence='type -a'
+alias rot13='tr a-mn-zA-MN-Z n-za-mN-ZA-M'
+#alias grep='grep -n'
+
 function proxy(){
 PROXY_SERVER=172.29.52.166
 PROXY_PORT=80
