@@ -16,10 +16,9 @@ set -o notify
 
   # Don't put duplicate lines in the history.
 export HISTCONTROL=erasedups:ignoredups
-if [ true ]; then
-	export HISTFILE=~/.bash_history
 
-#better to check bash version
+#because all bash I may encounter doesn't have all option I want
+#I'll get some error messages on some old RH server I still use
 	# do not complete an empty line
 	shopt -s no_empty_cmd_completion
 	# recursively search the tree when ** is specified
@@ -31,14 +30,13 @@ if [ true ]; then
 	# check !! !? repel from history and don't run them automatically
 	shopt -s histverify
 
-else
-
-	export HISTFILE=$HOME/.bash_histories/$(hostname)
-	if [ ! -e "$HISTFILE" ]; then
-		cp "$HOME/.bash_history" "$HISTFILE"
-	fi
-
+export HISTFILE=$HOME/.bash_histories/$(hostname)
+if [ ! -e "$HISTFILE" ]; then
+	mkdir -p "$HOME/.bash_histories"
+	touch "$HOME/.bash_history" #if the file didn't exist yet
+	cp "$HOME/.bash_history" "$HISTFILE"
 fi
+
 export HISTFILESIZE=10000
 export HISTSIZE=10000
 #export CDPATH=".:~:/cygdrive"
@@ -59,15 +57,7 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-xterm-color)
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    ;;
-*)
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-    ;;
-esac
+PS1='${debian_chroot:+($debian_chroot)}\[\033]0;\w\007\n\033[32m\]\u@\h \[\033[33m\]\w\[\033[0m\] \n$'
 
 # Comment in the above and uncomment this below for a color prompt
 #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
@@ -102,17 +92,12 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# some more ls aliases
-#alias ll='ls -alF'
-#alias la='ls -A'
-#alias l='ls -CF'
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
+#if [ -f /etc/bash_completion ]; then
+#    . /etc/bash_completion
+#fi
 
 # android compilation
 #export USE_CCACHE=1
@@ -127,16 +112,15 @@ PATH=~/local/bin:$PATH
 case "$TERM" in
 xterm*)
     TERM=xterm-256color
-    DIRCOLOR=`dircolors ~/.dircolors/dircolors.256dark 2>/dev/null`
+    DIRCOLOR=$(dircolors ~/.dircolors/dircolors.256dark 2>/dev/null)
     if [ -z "$DIRCOLOR" ]; then
-        DIRCOLOR=`dircolors ~/.dircolors/dircolors.older.256dark`
+            DIRCOLOR=$(dircolors ~/.dircolors/dircolors.older.256dark)
     fi
-    eval $DIRCOLOR
+    eval "$DIRCOLOR"
     ;;
 *)
     ;;
 esac
-
 
 # add completion in python shell
 export PYTHONSTARTUP=$HOME/.pythonrc.py
