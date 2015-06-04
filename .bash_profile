@@ -11,7 +11,7 @@ fi
 
 # include .bashrc if it exists
 if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
+    source ~/.bashrc
 fi
 
 # Set PATH so it includes user's private bin if it exists
