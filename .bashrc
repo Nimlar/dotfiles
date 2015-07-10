@@ -139,3 +139,9 @@ export PROMPT_COMMAND="history -a"
 
 #ST SunOx issue :
 #export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+
+#local local definition
+if [ -x .bashrc.$(hostname) ]; then
+       . $HOME/.bashrc.$(hostname)
+fi
+
