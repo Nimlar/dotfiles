@@ -141,7 +141,7 @@ export PROMPT_COMMAND="history -a"
 #export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 #local local definition
-if [ -x .bashrc.$(hostname) ]; then
+if [ -f $HOME/.bashrc.$(hostname) ]; then
        . $HOME/.bashrc.$(hostname)
 fi
 
