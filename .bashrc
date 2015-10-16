@@ -30,7 +30,8 @@ export HISTCONTROL=erasedups:ignoredups
 	# check !! !? repel from history and don't run them automatically
 	shopt -s histverify
 
-export HISTFILE=$HOME/.bash_histories/$(hostname)
+export HISTFILE
+HISTFILE=$HOME/.bash_histories/$(hostname)
 if [ ! -e "$HISTFILE" ]; then
 	mkdir -p "$HOME/.bash_histories"
 	touch "$HOME/.bash_history" #if the file didn't exist yet
@@ -76,6 +77,7 @@ esac
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 if [ -f ~/.bash_aliases ]; then
+# shellcheck disable=SC1091
     . ~/.bash_aliases
 fi
 
@@ -141,7 +143,8 @@ export PROMPT_COMMAND="history -a"
 #export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 #local local definition
-if [ -f $HOME/.bashrc.$(hostname) ]; then
-       . $HOME/.bashrc.$(hostname)
+if [ -f "$HOME/.bashrc.$(hostname)" ]; then
+# shellcheck source=/dev/null
+       . "$HOME/.bashrc.$(hostname)"
 fi
 
