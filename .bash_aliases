@@ -31,7 +31,10 @@ gvims () {
 	git config --local --add perso.vimserver "$1"
 	gvimss "$@";
 	}
-
+gvim_clean () {
+      MY_VIM_SERVERNAME=$(git config --local --get perso.vimserver) && find ~/.vim/sessions/ -iname $MY_VIM_SERVERNAME -print -exec mv {} /tmp/ \;
+      unset MY_VIM_SERVERNAME ;
+}
 
 beep() { echo -e "\a" ; paplay /usr/share/sounds/gnome/default/alerts/drip.ogg ;  }
 
