@@ -11,8 +11,8 @@
 	editor = vim
 
 [include]
-	path=~/.config/git/aliases
-	path=~/.config/git/localdefs
+	path = ~/.config/git/aliases
+	path = ~/.config/git/localdefs
 
 [push]
 	default = simple
