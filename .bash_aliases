@@ -15,11 +15,9 @@ export https_proxy=http://$PROXY_SERVER:$PROXY_PORT/
 
 }
 
-function del_proxy(){
+function unproxy(){
 unset http_proxy
 unset https_proxy
-unset HTTP_PROXY
-unset HTTPS_PROXY
 }
 
 
