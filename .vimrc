@@ -182,3 +182,12 @@ endfunction
 nmap <silent> <leader>mw :call MarkWindowSwap()<CR>
 nmap <silent> <leader>pw :call DoWindowSwap()<CR>
 
+" Set tab size as I expect
+"autocmd FileType * set tabstop=4|set shiftwidth=4|set expandtab|set softtabstop=4
+autocmd FileType make nnoremap <leader><tab> :set tabstop=4 shiftwidth=4 noexpandtab <CR><esc>
+autocmd FileType python nnoremap <leader><tab> :set tabstop=2 shiftwidth=2 expandtab <CR><esc>
+autocmd FileType * nnoremap <leader><tab> :set tabstop=4 shiftwidth=4 expandtab <CR><esc>
+" set linux specific tab
+nnoremap <Leader><tab>k :set noexpandtab tabstop=8 shiftwidth=8 <CR><esc>
+
+
