@@ -16,7 +16,7 @@ alias .git="GIT_DIR=~/.sync/.git git"
 To clone into a new home
 
 ```sh
-git clone https://github.com/Nimlar/dotfiles.git ~/.sync; cd ~/.sync; ./.config/git/init-sync
+git clone --recursive https://github.com/Nimlar/dotfiles.git ~/.sync; cd ~/.sync; ./.config/git/init-sync
 ```
 
 After the clone, ```init-sync``` will move the files to the ```$HOME```
