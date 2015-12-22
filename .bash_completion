@@ -1,0 +1,10 @@
+#!/bin/bash
+
+MY_BASH_COMPLETION_DIR=$HOME/.config/bash_completion.d
+
+for i in $(LC_ALL=C command ls "$MY_BASH_COMPLETION_DIR"); do
+    i=$MY_BASH_COMPLETION_DIR/$i
+    [[ ${i##*/} != @(*~|*.bak|*.swp|\#*\#|*.dpkg*|*.rpm@(orig|new|save)|Makefile*) \
+          && -f $i && -r $i ]] && . "$i"
+done
+
