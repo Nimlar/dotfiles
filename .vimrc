@@ -190,4 +190,5 @@ autocmd FileType * nnoremap <leader><tab> :set tabstop=4 shiftwidth=4 expandtab 
 " set linux specific tab
 nnoremap <Leader><tab>k :set noexpandtab tabstop=8 shiftwidth=8 <CR><esc>
 
-
+"format your code using [rustfmt][rfmt] every time a rust buffer is written.
+"let g:rustfmt_autosave = 1
