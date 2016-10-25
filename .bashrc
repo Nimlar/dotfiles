@@ -58,7 +58,7 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-PS1='\n${debian_chroot:+($debian_chroot)}\[\033]0;\w\007\033[32m\]\u@\h \[\033[33m\]\w\[\033[0m\] \n$'
+PS1='\n${extra_ps1_info:+$extra_ps1_info }${debian_chroot:+($debian_chroot)}\[\033]0;\w\007\033[32m\]\u@\h \[\033[33m\]\w\[\033[0m\] \n$'
 
 # Comment in the above and uncomment this below for a color prompt
 #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
