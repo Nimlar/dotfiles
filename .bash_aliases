@@ -12,12 +12,14 @@ PROXY_SERVER=172.29.52.166
 PROXY_PORT=80
 export  http_proxy=http://$PROXY_SERVER:$PROXY_PORT/
 export https_proxy=http://$PROXY_SERVER:$PROXY_PORT/
-
+extra_ps1_info=⇲
 }
 
 function unproxy(){
 unset http_proxy
 unset https_proxy
+extra_ps1_info=${extra_ps1_info/⇲/}
+
 }
 
 
