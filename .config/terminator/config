@@ -1,16 +1,23 @@
 [global_config]
-  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler
+  use_custom_url_handler = True
+  custom_url_handler = x-www-browser
   title_transmit_bg_color = "#d30102"
   focus = system
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler
 [keybindings]
+  insert_number = None
+  rotate_cw = None
   hide_window = None
+  full_screen = None
+  insert_padded = None
 [profiles]
   [[default]]
+    background_image = None
     urgent_bell = True
+    use_system_font = False
+    show_titlebar = False
     word_chars = "-A-Za-z0-9,./?%&#~_"
     scrollback_infinite = True
-    show_titlebar = False
-    background_image = None
   [[solarized-dark]]
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     background_image = None
@@ -36,10 +43,10 @@
 [layouts]
   [[default]]
     [[[child1]]]
-      type = Terminal
       parent = window0
       profile = solarized-dark
+      type = Terminal
     [[[window0]]]
-      type = Window
       parent = ""
+      type = Window
 [plugins]
