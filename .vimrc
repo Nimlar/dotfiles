@@ -125,7 +125,7 @@ noremap <Leader>g* :let @/ = expand('<cword>')\|set hlsearch<C-M>
 
 
 " rename current tab with servername
-noremap <Leader>t :execute "!echo 'awful.tag.selected().name = \"" . v:servername . "\"' \| awesome-client" <cr>
+noremap <Leader>t :execute "!echo -e 'awful = require(\"awful\")\nawful.tag.selected().name = \"" . v:servername . "\"' \| awesome-client" <cr>
 
 " manage session
 " Sessions restore
