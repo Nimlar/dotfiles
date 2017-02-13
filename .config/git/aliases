@@ -5,7 +5,7 @@
 	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%an]" --decorate --numstat
 
 	lnc = log --pretty=format:"%h\\ %s\\ [%an]"
-
+	lsx = log --pretty=tformat:%h%x09%s%x09%an%x09%cn
 	lasttag = describe --tags --abbrev=0
 	lt = describe --tags --abbrev=0
 	diffall = difftool -d
