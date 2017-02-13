@@ -3,12 +3,18 @@
 [color]
 	ui = auto
 [merge]
-	tool = meld
+	tool = mymeld
+	conflictstyle = diff3
+[mergetool "mymeld_plain"]
+	cmd = meld --diff $LOCAL $MERGED $REMOTE --diff $BASE $LOCAL --diff $BASE $REMOTE
+[mergetool "mymeld"]
+	cmd = meld $LOCAL $BASE $REMOTE -o $MERGED --diff $BASE $LOCAL --diff $BASE $REMOTE --auto-merge
 [diff]
 	tool = meld
 [core]
 	excludesfile = /home/toromano/.config/git/ignore
 	editor = vim
+#	gitproxy = /tmp/git-proxy
 
 [include]
 	path = ~/.config/git/aliases
@@ -20,3 +26,5 @@
 	helper = cache --timeout=3600
 [rebase]
 	autosquash = true
+[rerere]
+	enabled = true
