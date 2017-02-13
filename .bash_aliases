@@ -41,13 +41,13 @@ beep() { echo -e "\a" ; paplay /usr/share/sounds/gnome/default/alerts/drip.ogg ;
 #tag() { echo "awful.tag.selected().name=\"$1\"" |  awesome-client ; }
 tag() {
    if [ $# -eq 1 ]; then
-       echo "awful.tag.selected().name=\"$1\"" |  awesome-client ;
+      echo -e "awful = require(\"awful\")\nawful.tag.selected().name=\"$1\"" |  awesome-client ;
    fi
    if [ $# -eq 2 ]; then
-      echo "tags[mouse.screen][$2].name=\"$1\"" |  awesome-client ;
+      echo -e "tags[mouse.screen][$2].name=\"$1\"" |  awesome-client ;
    fi
    if [ $# -eq 3 ]; then
-       echo "tags[$3][$2].name=\"$1\"" |  awesome-client ;
+       echo -e  "tags[$3][$2].name=\"$1\"" |  awesome-client ;
    fi
 }
 
