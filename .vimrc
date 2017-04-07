@@ -40,9 +40,14 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 "let g:syntastic_c_include_dirs = ['../sttruc', 'src']
+
+"let g:syntastic_c_no_default_include_dirs = 1
+"let g:syntastic_c_checker_checkpatch_exec = '/media/disk2/git/STLinux-sti-4.4/scripts/checkpatch.pl' 
+"let g:syntastic_c_compiler='/home/toromano/bin/aarch64-linux-gcc' 
+"let g:syntastic_c_checkers = ['gcc', 'checkpatch']
 
 " Searching
 nnoremap / /\v
