@@ -87,6 +87,10 @@ set listchars=tab:▸\ ,trail:·
 "set listchars=tab:
 nnoremap <F5> :GundoToggle<CR>
 
+if has('python3')
+    let g:gundo_prefer_python3 = 1          " anything else breaks on Ubuntu 16.04+
+endif
+
 set background=dark
 colorscheme solarized
 
@@ -133,6 +137,9 @@ noremap <Leader>g* :let @/ = expand('<cword>')\|set hlsearch<C-M>
 noremap <Leader>t :execute "!echo -e 'awful = require(\"awful\")\\nawful.tag.selected().name = \"" . v:servername . "\"' \| awesome-client" <cr>
 
 " manage session
+
+set sessionoptions=buffers,curdir,folds,help,localoptions,options,tabpages,winsize
+
 " Sessions restore
 function! RestoreSession(name)
   if a:name != ""
