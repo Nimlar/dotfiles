@@ -8,11 +8,12 @@ alias rot13='tr a-mn-zA-MN-Z n-za-mN-ZA-M'
 #alias grep='grep -n'
 
 function proxy(){
-PROXY_SERVER=172.29.52.166
+PROXY_SERVER=165.225.76.32
 PROXY_PORT=80
 export  http_proxy=http://$PROXY_SERVER:$PROXY_PORT/
 export https_proxy=http://$PROXY_SERVER:$PROXY_PORT/
-extra_ps1_info=⇲
+export no_proxy=".st.com"
+extra_ps1_info="$extra_ps1_info"⇲
 }
 
 function unproxy(){
