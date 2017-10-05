@@ -5,7 +5,7 @@ alias less='less -r -i'
 # alias rm='rm -i'
 # alias whence='type -a'
 alias rot13='tr a-mn-zA-MN-Z n-za-mN-ZA-M'
-#alias grep='grep -n'
+alias grep='grep -d skip'
 
 function proxy(){
 PROXY_SERVER=165.225.76.32
