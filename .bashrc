@@ -148,3 +148,11 @@ if [ -f "$HOME/.bashrc.$(hostname)" ]; then
        . "$HOME/.bashrc.$(hostname)"
 fi
 
+# check if ssh connection
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+	# we are not in a running screen, and we are in a terminal
+	if [ -z "${STY}" ] && [ -t 0 ]; then
+		screen -A -d -R -S ssh
+	fi
+fi
+
