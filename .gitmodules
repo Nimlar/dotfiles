@@ -19,3 +19,6 @@
 [submodule ".vim/bundle/rust.vim"]
 	path = .vim/bundle/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
+[submodule ".config/bash_extensions/bash-preexec"]
+	path = .config/bash_extensions/bash-preexec
+	url = https://github.com/rcaloras/bash-preexec.git
