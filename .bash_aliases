@@ -23,6 +23,17 @@ extra_ps1_info=${extra_ps1_info/⇲/}
 
 }
 
+function buildprompt(){
+	OLD_BUILD_PROMPT_COMMAND="$PROMPT_COMMAND"
+	PROMPT_COMMAND="$PROMPT_COMMAND ; beep"
+	extra_ps1_info="$extra_ps1_info"🔔
+}
+
+function unbuildprompt(){
+	PROMPT_COMMAND="$OLD_BUILD_PROMPT_COMMAND"
+	extra_ps1_info=${extra_ps1_info/🔔/}
+}
+
 
 gvimn() { command gvim "$@"; }
 gvimss() { (command gvim --serverlist | grep -i "^$1$" 2>&1 > /dev/null ) && (echo "open ${@:2} in server $1" && command gvim --servername "$1" --remote-silent "${@:2}" ) || (echo "open ${@:2} in server $1" && command gvim --servername "$1" "${@:2}" ) ; }
