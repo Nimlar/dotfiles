@@ -28,3 +28,4 @@ fi
 # if [ -d ~/info ]; then
 #   INFOPATH="~/info:${INFOPATH}"
 # fi
+export PATH="$HOME/.cargo/bin:$PATH"
