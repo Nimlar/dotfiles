@@ -1,0 +1,23 @@
+enable awesome with gnome
+
+copy
+usr/share/xsessions/awesome-gnome.desktop
+usr/share/applications/awesome.desktop
+usr/share/gnome-session/sessions/awesome.session
+to /
+
+run next command :
+    sed -i '/^OnlyShowIn=/s/GNOME;/GNOME;Awesome;/' /etc/xdg/autostart/gnome-settings-daemon.desktop
+    dconf write /org/gnome/settings-daemon/plugins/cursor/active false
+
+source: 
+https://makandracards.com/makandra/1367-running-the-awesome-window-manager-within-gnome
+https://aur.archlinux.org/packages/awesome-gnome/
+
+Note:
+to check in /usr/share/gnome-session/sessions/awesome.session
+if 
+RequiredComponents
+and 
+RequiredProviders
+are ok
