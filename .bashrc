@@ -44,7 +44,7 @@ export HISTSIZE=10000
 # Ignore some controlling instructions
 # HISTIGNORE is a colon-delimited list of patterns which should be excluded.
 # The '&' is a special pattern which suppresses duplicate entries.
-export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls'
+export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls:history*'
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
