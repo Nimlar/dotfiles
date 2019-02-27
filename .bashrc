@@ -150,7 +150,13 @@ export UBUNTU_MENUPROXY=0
 #fi
 
 #ST anoing prompt, and add mine (save to disk all history immediatlly)
+# https://unix.stackexchange.com/questions/18212/bash-history-ignoredups-and-erasedups-setting-conflict-with-common-history
+# Not a so good idea to save historye betwwen different prompts, there some local continuity to keep.
+#export PROMPT_COMMAND="history -n; history -w; history -c; history -r;"
 export PROMPT_COMMAND="history -a"
+#preexec extension will copy this into its own precmd system
+
+
 
 #ST SunOx issue :
 #export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
@@ -169,3 +175,9 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 	fi
 fi
 
+# need to be the last line
+# shellcheck source=/home/toromano/.config/bash_extensions/bash-preexec/bash-preexec.sh
+source $HOME/.config/bash_extensions/bash-preexec/bash-preexec.sh
+
+
+precmd_functions+=(title)
