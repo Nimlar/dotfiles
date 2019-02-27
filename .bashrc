@@ -58,15 +58,29 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-PS1='\n${extra_ps1_info:+$extra_ps1_info }${debian_chroot:+($debian_chroot)}\[\033]0;\w\007\033[32m\]\u@\h \[\033[33m\]\w\[\033[0m\] \n$'
-
+#PS1='\n${extra_ps1_info:+$extra_ps1_info }${debian_chroot:+($debian_chroot)}\[\033]0;\w\007\033[32m\]\u@\h \[\033[33m\]\w\[\033[0m\] \n$'
+PS1='\n${extra_ps1_info:+$extra_ps1_info }${debian_chroot:+($debian_chroot)}\[$(x=$?; tput sgr0; if test $x -eq 0; then tput setaf 2; else echo $x; tput setaf 9; fi)\]\u@\h\[$(tput sgr0)\] \[$(tput setaf 3)\]\w\[$(tput sgr0)\] \n$ '
+#setbf 1 for important error
+#PS1='\n${extra_ps1_info:+$extra_ps1_info }${debian_chroot:+($debian_chroot)}\[$(x=$?; tput sgr0; if test $x -eq 0; then tput setaf 64; else tput setaf 166; fi)\]\u@\h \[$(tput setaf 136)\]\w\[$(tput sgr0)\] \n$ '
+#export PS1='\[$(x=$?; tput sgr0; if test $x -eq 0; then tput setaf 2; else tput setaf 1; tput bold; fi)\]\A\[$(tput sgr0)\] \u@\h:$(pwd)\n\$ '
 # Comment in the above and uncomment this below for a color prompt
 #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+xterm*)
+    if [ "$COLORTERM" = "gnome-terminal" ] ; then
+#terminator terminal doesn work as epxected... need some investifation...
+#        TERM=terminator
+#        function title() {
+#            tput hs && echo -ne "$(tput tsl) ${PWD/$HOME/'~'} $(tput fsl)"
+#        }
+#    else
+        TERM=xterm-256color
+        function title() {
+            echo -ne "\\033]0;${PWD/$HOME/'~'}\\007"
+        }
+    fi
     ;;
 *)
     ;;
@@ -112,8 +126,7 @@ PATH=~/local/bin:$PATH
 
 # add Solarized option
 case "$TERM" in
-xterm*)
-    TERM=xterm-256color
+xterm*|terminator)
     DIRCOLOR=$(dircolors ~/.dircolors/dircolors.256dark 2>/dev/null)
     if [ -z "$DIRCOLOR" ]; then
             DIRCOLOR=$(dircolors ~/.dircolors/dircolors.older.256dark)
