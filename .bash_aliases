@@ -38,8 +38,23 @@ function remove_precmd_functions () {
 }
 
 function unbuildprompt(){
-	remove_precmd_functions beep
+	remove_precmd_functions beep_chkerr
 	extra_ps1_info=${extra_ps1_info/🔔/}
+}
+
+function check_pre(){
+	for i in "${!preexec_functions[@]}"
+	do
+		echo "preexec_functions[$i]: ${preexec_functions[$i]}"
+		[ -n "$1" ] &&  type "${preexec_functions[$i]}" |& sed 's/^/  /'
+	done
+	echo
+	for i in "${!precmd_functions[@]}"
+	do
+		echo "precmd_functions[$i]: ${precmd_functions[$i]}"
+		[ -n "$1" ] &&  type "${precmd_functions[$i]}" |& sed 's/^/  /'
+	done
+
 }
 
 
@@ -85,14 +100,6 @@ alias sssh="TERM=xterm ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyCheck
 alias sscp="TERM=xterm scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias sssh-copy-id="TERM=xterm ssh-copy-id -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 function fr () { find "${2:-.}" -name "$1" -exec readlink -f '{}' \; ; }
-
-function check_preexec(){
-	for i in "${!preexec_functions[@]}"
-	do
-		echo "preexec_functions[$i]: ${preexec_functions[$i]}"
-		[ -n "$1" ] &&  type "${preexec_functions[$i]}" |& sed 's/^/  /'
-	done
-}
 
 #$1 nb tick
 #$2 time of one ticks (default 5min)
