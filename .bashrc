@@ -69,8 +69,7 @@ PS1='\n${extra_ps1_info:+$extra_ps1_info }${debian_chroot:+($debian_chroot)}\[$(
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*)
-    if [ "$COLORTERM" = "gnome-terminal" ] ; then
-#terminator terminal doesn work as epxected... need some investifation...
+#    if [ "$COLORTERM" = "truecolor" ] ; then
 #        TERM=terminator
 #        function title() {
 #            tput hs && echo -ne "$(tput tsl) ${PWD/$HOME/'~'} $(tput fsl)"
@@ -80,7 +79,7 @@ xterm*)
         function title() {
             echo -ne "\\033]0;${PWD/$HOME/'~'}\\007"
         }
-    fi
+#    fi
     ;;
 *)
     ;;
