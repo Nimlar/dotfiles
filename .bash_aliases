@@ -12,6 +12,7 @@ PROXY_SERVER=$1
 PROXY_PORT=$2
 export  http_proxy=http://$PROXY_SERVER:$PROXY_PORT/
 export https_proxy=http://$PROXY_SERVER:$PROXY_PORT/
+export ftp_proxy=http://$PROXY_SERVER:$PROXY_PORT/
 export no_proxy=".st.com"
 extra_ps1_info="$extra_ps1_info"⇲
 }
