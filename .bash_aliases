@@ -81,6 +81,8 @@ function m() {
 }
 
 alias sssh="TERM=xterm ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+alias sscp="TERM=xterm scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+alias sssh-copy-id="TERM=xterm ssh-copy-id -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 function fr () { find "${2:-.}" -name "$1" -exec readlink -f '{}' \; ; }
 
 function check_preexec(){
