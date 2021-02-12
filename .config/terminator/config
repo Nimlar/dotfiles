@@ -6,6 +6,7 @@
   use_custom_url_handler = True
 [keybindings]
   full_screen = None
+  help = None
   hide_window = None
   insert_number = None
   insert_padded = None
