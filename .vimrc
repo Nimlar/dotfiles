@@ -204,3 +204,6 @@ nnoremap <Leader><tab>k :set noexpandtab tabstop=8 shiftwidth=8 <CR><esc>
 
 "format your code using [rustfmt][rfmt] every time a rust buffer is written.
 "let g:rustfmt_autosave = 1
+
+" from Yann
+set cinoptions=:0,l1,t0,g0,(0
