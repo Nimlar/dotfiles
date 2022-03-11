@@ -21,3 +21,6 @@ RequiredComponents
 and 
 RequiredProviders
 are ok
+
+#deb dependencies :
+apt install xautolock i3lock
