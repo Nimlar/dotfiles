@@ -83,7 +83,7 @@ nnoremap k gk
 
 set list
 "set listchars=tab:▸\ ,eol:¬
-set listchars=tab:▸\ ,trail:·
+set listchars=tab:▸\ ,trail:▓
 "set listchars=tab:
 nnoremap <F5> :GundoToggle<CR>
 
@@ -114,9 +114,14 @@ else
     nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '\'<CR>
 endif
 
-"set font
+
 if has('gui_running')
+   "set font for gvim
    set guifont=Source\ Code\ Pro\ Medium\ 10
+else
+   "configure mouse for vim
+   set mouse=a
+   set ttymouse=xterm2
 endif
 
 " Auto indent depending of file type
@@ -206,4 +211,17 @@ nnoremap <Leader><tab>k :set noexpandtab tabstop=8 shiftwidth=8 <CR><esc>
 "let g:rustfmt_autosave = 1
 
 " from Yann
+" align at previous open (
 set cinoptions=:0,l1,t0,g0,(0
+
+" match double 
+"highlight ExtraWhitespace ctermbg=red guibg=red
+highlight DoubleWhitespace term=underline cterm=underline gui=undercurl
+"autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+match DoubleWhitespace /\S\zs  \+\ze\S/
+"match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match DoubleWhitespace /\S\zs  \+\ze\S/
+"autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+"autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+"autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
