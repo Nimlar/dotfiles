@@ -172,12 +172,12 @@ if [ -f "$HOME/.bashrc.$(hostname)" ]; then
 fi
 
 # check if ssh connection
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-	# we are not in a running screen, and we are in a terminal
-	if [ -z "${STY}" ] && [ -t 0 ]; then
-		screen -A -d -R -S ssh
-	fi
-fi
+#if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+#	# we are not in a running screen, and we are in a terminal
+#	if [ -z "${STY}" ] && [ -t 0 ]; then
+#		screen -A -d -R -S ssh
+#	fi
+#fi
 
 # need to be the last line
 # shellcheck source=/home/toromano/.config/bash_extensions/bash-preexec/bash-preexec.sh
