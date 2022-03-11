@@ -185,3 +185,6 @@ source $HOME/.config/bash_extensions/bash-preexec/bash-preexec.sh
 
 
 precmd_functions+=(title)
+
+#ripgrep configuration file
+export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/config

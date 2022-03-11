@@ -1,0 +1,5 @@
+# Add my 'dts' device tree source type.
+--type-add=dts:*.{dts,dtsi}
+--type-add=Kconfig:Kconfig
+
+--color=always
