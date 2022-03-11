@@ -29,4 +29,4 @@
 [rerere]
 	enabled = true
 [help]
-	autocorrect = 1
+	autocorrect = 15
