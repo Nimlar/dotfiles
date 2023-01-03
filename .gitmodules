@@ -22,3 +22,6 @@
 [submodule ".config/bash_extensions/bash-preexec"]
 	path = .config/bash_extensions/bash-preexec
 	url = https://github.com/rcaloras/bash-preexec.git
+[submodule ".config/alacritty/alacritty-theme"]
+	path = .config/alacritty/alacritty-theme
+	url = https://github.com/eendroroy/alacritty-theme.git

@@ -24,3 +24,6 @@ are ok
 
 #deb dependencies :
 apt install xautolock i3lock
+
+# terminal in rust
+cargo install alacritty
