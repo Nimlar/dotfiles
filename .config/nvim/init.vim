@@ -1,0 +1,123 @@
+
+set scrolloff=3
+set visualbell
+set cursorline
+
+let mapleader = ","
+
+" Backups
+let &backupdir=stdpath('state') . '/backup//' " backups
+let &directory=stdpath('state') . '/swap//'   " swap files
+set backup                        " enable backups
+
+let &undodir=stdpath('state') . '/undo//'
+set undofile
+set undoreload=10000
+
+" Status line
+set statusline=%F%m%r%h%w%=(%02n)\ (%{&ff}/%Y)\ (%l\/%L,%c)
+
+" Searching
+nnoremap / /\v
+vnoremap / /\v
+set ignorecase
+set smartcase
+set incsearch
+set showmatch
+set hlsearch
+set gdefault
+map <leader><space> :noh<cr>
+nmap <tab> %
+vmap <tab> %
+
+" Soft/hard wrapping
+set wrap
+set textwidth=79
+"keep default set formatoption=jcroql
+
+"force using hjkl
+"nnoremap <up> <nop>
+"nnoremap <down> <nop>
+"nnoremap <left> <nop>
+"nnoremap <right> <nop>
+"inoremap <up> <nop>
+"inoremap <down> <nop>
+"inoremap <left> <nop>
+"inoremap <right> <nop>
+nnoremap j gj
+nnoremap k gk
+
+" More natural splits
+set splitbelow          " Horizontal split below current.
+set splitright          " Vertical split to right of current.
+
+set list
+"set listchars=tab:▸\ ,eol:¬
+"set listchars=tab:▸\ ,trail:▓
+set listchars=tab:▸\ ,trail:▓,extends:>,precedes:<,nbsp:+
+
+"http://stackoverflow.com/questions/1005/getting-root-permissions-on-a-file-inside-of-vi
+cmap w!! w !sudo tee >/dev/null %
+"
+"associate config.in with makefile
+autocmd BufRead,BufNewFile config.in set filetype=make
+autocmd BufRead,BufNewFile *.mkf set filetype=make
+
+" Auto indent depending of file type
+filetype plugin indent on
+"
+" higlight without moving cursor (in fact change search bufer)
+" from http://superuser.com/a/255120/30031
+" The leader defaults to backslash, so (by default) this
+" maps \* and \g* (see :help Leader).
+" These work like * and g*, but do not move the cursor and always set hls.
+" my leader is ',' so ,* ,g*
+noremap <Leader>* :let @/ = '\<'.expand('<cword>').'\>'\|set hlsearch<C-M>
+noremap <Leader>g* :let @/ = expand('<cword>')\|set hlsearch<C-M>
+" in same superuser part :match command seem interresting, need to investigate
+
+" rename current tab with servername
+noremap <Leader>t :execute "!echo -e 'awful = require(\"awful\")\\nawful.tag.selected().name = \"" . fnamemodify(v:servername,':p:h:t') . "\"' \| awesome-client" <cr>
+
+" manage session
+let sessions_path=stdpath('state') . '/sessions/'
+
+"default     blank,buffers,curdir,folds,help,                     tabpages,winsize,terminal
+set sessionoptions=buffers,curdir,folds,help,localoptions,options,tabpages,winsize
+
+" Sessions restore
+function! RestoreSession(name)
+  let l:session = fnamemodify(a:name, ":p:h:t")
+  if match(l:session, '^\d\+$') == -1
+    if filereadable(g:sessions_path . l:session)
+      execute 'source ' . g:sessions_path . l:session
+      "if bufexists(
+    end
+  end
+endfunction
+
+" Sessions save.
+function! SaveSession(name)
+  let l:session = fnamemodify(a:name, ":p:h:t") 
+  if match(l:session, '^\d\+$') == -1
+    execute 'mksession! ' . g:sessions_path . l:session
+  end
+endfunction
+
+" Restore and save sessions.
+autocmd VimEnter * nested call RestoreSession(v:servername)
+autocmd VimLeave * call SaveSession(v:servername)
+"end
+"
+" Set tab size as I expect
+"autocmd FileType * set tabstop=4|set shiftwidth=4|set expandtab|set softtabstop=4
+autocmd FileType make nnoremap <leader><tab> :set tabstop=4 shiftwidth=4 noexpandtab <CR><esc>
+autocmd FileType python nnoremap <leader><tab> :set tabstop=2 shiftwidth=2 expandtab <CR><esc>
+autocmd FileType * nnoremap <leader><tab> :set tabstop=4 shiftwidth=4 expandtab <CR><esc>
+" set linux specific tab
+nnoremap <Leader><tab>k :set noexpandtab tabstop=8 shiftwidth=8 <CR><esc>
+
+" from Yann
+" align at previous open (
+set cinoptions=:0,l1,t0,g0,(0
+
