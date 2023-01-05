@@ -76,7 +76,7 @@ nvimss() {
 	if [ -S "$1" ]; then
 		#socket already exist, reuse the running nvim
 		echo "open ${*:2} in server $1"
-		command nvim --servername "$1" --remote-silent "${@:2}"
+		command nvim --server "$1" --remote-silent "${@:2}"
 	else
 		#create the server
 		command nvim --listen "$1" "${@:2}"
