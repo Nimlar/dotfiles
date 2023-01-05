@@ -22,6 +22,9 @@ Plug 'airblade/vim-gitgutter'
 " syntastic remplacement
 Plug 'dense-analysis/ale'
 
+" Undo tree
+Plug 'mbbill/undotree'
+
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
@@ -86,6 +89,8 @@ set list
 "set listchars=tab:▸\ ,eol:¬
 "set listchars=tab:▸\ ,trail:▓
 set listchars=tab:▸\ ,trail:▓,extends:>,precedes:<,nbsp:+
+
+nnoremap <F5> :UndotreeToggle<CR>
 
 "http://stackoverflow.com/questions/1005/getting-root-permissions-on-a-file-inside-of-vi
 cmap w!! w !sudo tee >/dev/null %
