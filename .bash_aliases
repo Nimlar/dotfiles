@@ -112,6 +112,7 @@ tag() {
 
 # management of .files in git
 alias .git="GIT_DIR=~/.sync/.git git"
+alias .gitk="GIT_DIR=~/.sync/.git gitk"
 
 function m() {
         mplayer "${1/https/http}" -loop 0
