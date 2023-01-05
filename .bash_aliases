@@ -32,7 +32,7 @@ function buildprompt() {
 function remove_precmd_functions () {
 	for i in "${!precmd_functions[@]}";do
 		if [ "${precmd_functions[$i]}" == "$1" ]; then
-			unset precmd_functions[$i]
+			unset "precmd_functions[$i]"
 		fi
 	done
 }
@@ -43,7 +43,7 @@ function unbuildprompt(){
 }
 
 function check_pre(){
-	for i in "${!preexec_functions[@]}"
+	for i in "${!preexec_functions[@]:-}"
 	do
 		echo "preexec_functions[$i]: ${preexec_functions[$i]}"
 		[ -n "$1" ] &&  type "${preexec_functions[$i]}" |& sed 's/^/  /'
