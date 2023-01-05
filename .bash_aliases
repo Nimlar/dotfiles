@@ -71,6 +71,28 @@ gvim_clean () {
       unset MY_VIM_SERVERNAME ;
 }
 
+nvimn() { command nvim "$@"; }
+nvimss() {
+	if [ -S "$1" ]; then
+		#socket already exist, reuse the running nvim
+		echo "open ${*:2} in server $1"
+		command nvim --servername "$1" --remote-silent "${@:2}"
+	else
+		#create the server
+		command nvim --listen "$1" "${@:2}"
+	fi
+}
+nvims () {
+	local MY_NVIM_PIPE
+	MY_NVIM_PIPE=$(git rev-parse --show-toplevel 2>/dev/null)
+	if [ -n "$MY_NVIM_PIPE" ]; then
+		nvimss "$MY_NVIM_PIPE"/.neovim.pipe "$@"
+	else
+		nvimss ~/.local/state/nvim/.neocim.pipe "$@"
+	fi
+	unset MY_NVIM_PIPE
+}
+
 beep() { echo -e '\a' ; (paplay /usr/share/sounds/gnome/default/alerts/drip.ogg &) }
 beep_error() { echo -e '\a'; (paplay /usr/share/sounds/ubuntu/stereo/dialog-error.ogg &) }
 beep_chkerr() { if test $? -eq 0; then beep ; else beep_error ; fi; }
