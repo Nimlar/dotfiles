@@ -11,6 +11,8 @@
 	cmd = meld $LOCAL $BASE $REMOTE -o $MERGED --diff $BASE $LOCAL --diff $BASE $REMOTE --auto-merge
 [diff]
 	tool = meld
+[diff "meld"]
+	command = meld
 [core]
 	excludesfile = /home/toromano/.config/git/ignore
 	editor = vim
