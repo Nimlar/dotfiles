@@ -1,1 +1,1 @@
-/home/toromano/.xinitrc
+.xinitrc

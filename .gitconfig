@@ -32,3 +32,5 @@
 	enabled = true
 [help]
 	autocorrect = 15
+[pull]
+	rebase = true
