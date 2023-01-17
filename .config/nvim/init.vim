@@ -163,3 +163,7 @@ nnoremap <Leader><tab>k :set noexpandtab tabstop=8 shiftwidth=8 <CR><esc>
 " align at previous open (
 set cinoptions=:0,l1,t0,g0,(0
 
+let local_init=stdpath("config") ."/init." . substitute(system("hostname"), '\n', '', '') . ".vim"
+if filereadable(local_init)
+	execute "source" . local_init
+end
