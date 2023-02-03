@@ -14,7 +14,7 @@
 [diff "meld"]
 	command = meld
 [core]
-	excludesfile = /home/toromano/.config/git/ignore
+	excludesfile = ~/.config/git/ignore
 	editor = vim
 #	gitproxy = /tmp/git-proxy
 
