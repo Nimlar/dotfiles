@@ -1,3 +1,4 @@
 *~
 .syntastic_c_config
 .neovim.pipe
+compile_commands.json
