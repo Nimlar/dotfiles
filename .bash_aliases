@@ -73,24 +73,33 @@ gvim_clean () {
 
 nvimn() { command nvim "$@"; }
 nvimss() {
+	declare -a files
+	if [ -n "$2" ]; then
+		for i in "${@:3}"
+		do
+			files+=("$(realpath --relative-to="$2" "$i")")
+		done
+	else
+		files=("${@:3}")
+	fi
 	if [ -S "$1" ]; then
 		#socket already exist, reuse the running nvim
-		echo "open ${*:2} in server $1"
-		command nvim --server "$1" --remote-silent "${@:2}"
+		echo "open ${files[*]} in server $1 ${2:+from $2}"
+		command nvim --server "$1" --remote-silent "${files[@]}"
 	else
 		#create the server
-		command nvim --listen "$1" "${@:2}"
+		command nvim --listen "$1" "${files[@]}"
 	fi
 }
 nvims () {
-	local MY_NVIM_PIPE
-	MY_NVIM_PIPE=$(git rev-parse --show-toplevel 2>/dev/null)
-	if [ -n "$MY_NVIM_PIPE" ]; then
-		nvimss "$MY_NVIM_PIPE"/.neovim.pipe "$@"
+	local MY_GIT_DIR
+	MY_GIT_DIR=$(git rev-parse --show-toplevel 2>/dev/null)
+	if [ -n "$MY_GIT_DIR" ]; then
+		nvimss "$MY_GIT_DIR"/.neovim.pipe "$MY_GIT_DIR" "$@"
 	else
-		nvimss ~/.local/state/nvim/.neocim.pipe "$@"
+		nvimss ~/.local/state/nvim/.neovim.pipe "" "$@"
 	fi
-	unset MY_NVIM_PIPE
+	unset MY_GIT_DIR
 }
 
 beep() { echo -e '\a' ; (paplay /usr/share/sounds/gnome/default/alerts/drip.ogg &) }
