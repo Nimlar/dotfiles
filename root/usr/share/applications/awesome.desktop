@@ -5,3 +5,4 @@ Name=Awesome
 Comment=The awesome launcher!
 TryExec=awesome
 Exec=awesome
+NoDisplay=true
