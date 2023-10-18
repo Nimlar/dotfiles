@@ -90,7 +90,7 @@ esac
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 if [ -f ~/.bash_aliases ]; then
-# shellcheck disable=SC1091
+# shellcheck disable=SC1090
     . ~/.bash_aliases
 fi
 
@@ -125,6 +125,11 @@ PATH=~/bin:$PATH
 
 # locl nodejs installation
 PATH=~/local/bin:$PATH
+
+# Rust installation
+if [ -d "$HOME/.cargo/bin" ]; then
+PATH="$HOME/.cargo/bin:$PATH"
+fi
 
 #export LANG="en_US.UTF-8" 
 
@@ -181,8 +186,7 @@ fi
 
 # need to be the last line
 # shellcheck source=/home/toromano/.config/bash_extensions/bash-preexec/bash-preexec.sh
-source $HOME/.config/bash_extensions/bash-preexec/bash-preexec.sh
-
+source "$HOME/.config/bash_extensions/bash-preexec/bash-preexec.sh"
 
 precmd_functions+=(title)
 
