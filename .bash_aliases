@@ -43,7 +43,7 @@ function unbuildprompt(){
 }
 
 function check_pre(){
-	for i in "${!preexec_functions[@]:-}"
+	for i in "${!preexec_functions[@]}"
 	do
 		echo "preexec_functions[$i]: ${preexec_functions[$i]}"
 		[ -n "$1" ] &&  type "${preexec_functions[$i]}" |& sed 's/^/  /'
@@ -122,6 +122,7 @@ tag() {
 # management of .files in git
 alias .git="GIT_DIR=~/.sync/.git git"
 alias .gitk="GIT_DIR=~/.sync/.git gitk"
+alias .git_complete="__git_complete .git __git_main"
 
 function m() {
         mplayer "${1/https/http}" -loop 0
