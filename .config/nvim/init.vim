@@ -188,3 +188,12 @@ nnoremap   <silent>   <F12>   :FloatermToggle<CR>
 tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermToggle<CR>
 " To simulate i_CTRL-R in terminal-mode:
 tnoremap   <expr>     <C-R>   '<C-\><C-N>"'.nr2char(getchar()).'pi'
+
+function! SshTo(...)
+    augroup ssh
+    autocmd! ssh
+    for arg in a:000
+        let l:autocmd_str = "autocmd ssh BufWritePost * silent! execute '! scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no % root@" . arg . ":/home/root/'"
+        execute l:autocmd_str
+    endfor
+endfunction
