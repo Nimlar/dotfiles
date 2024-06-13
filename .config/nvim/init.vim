@@ -153,9 +153,10 @@ autocmd VimLeave * call SaveSession(v:servername)
 "
 " Set tab size as I expect
 "autocmd FileType * set tabstop=4|set shiftwidth=4|set expandtab|set softtabstop=4
-autocmd FileType make nnoremap <leader><tab> :set tabstop=4 shiftwidth=4 noexpandtab <CR><esc>
-autocmd FileType python nnoremap <leader><tab> :set tabstop=2 shiftwidth=2 expandtab <CR><esc>
-autocmd FileType * nnoremap <leader><tab> :set tabstop=4 shiftwidth=4 expandtab <CR><esc>
+set tabstop=4 shiftwidth=4 expandtab
+autocmd FileType make set tabstop=4 shiftwidth=4 noexpandtab textwidth=0
+autocmd FileType rust set tabstop=4 shiftwidth=4 noexpandtab textwidth=0
+autocmd FileType python set tabstop=4 shiftwidth=4 expandtab textwidth=0
 " set linux specific tab
 nnoremap <Leader><tab>k :set noexpandtab tabstop=8 shiftwidth=8 <CR><esc>
 
