@@ -175,6 +175,8 @@ if filereadable(local_init)
 	execute "source" . local_init
 end
 
+set clipboard+=unnamed
+
 "FloatTerm
 nnoremap   <silent>   <F7>    :FloatermNew<CR>
 tnoremap   <silent>   <F7>    <C-\><C-n>:FloatermNew<CR>
