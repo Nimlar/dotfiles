@@ -28,6 +28,9 @@ Plug 'mbbill/undotree'
 " NeoSolarized
 Plug 'overcache/NeoSolarized'
 
+" floating terminal
+Plug 'voldikss/vim-floaterm'
+
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
@@ -125,7 +128,7 @@ noremap <Leader>t :execute "!echo -e 'awful = require(\"awful\")\\nawful.tag.sel
 let sessions_path=stdpath('state') . '/sessions/'
 
 "default     blank,buffers,curdir,folds,help,                     tabpages,winsize,terminal
-set sessionoptions=buffers,curdir,folds,help,localoptions,options,tabpages,winsize
+set sessionoptions=buffers,curdir,folds,help,localoptions,options,tabpages,winsize,terminal
 
 " Sessions restore
 function! RestoreSession(name)
@@ -168,3 +171,15 @@ let local_init=stdpath("config") ."/init." . substitute(system("hostname"), '\n'
 if filereadable(local_init)
 	execute "source" . local_init
 end
+
+"FloatTerm
+nnoremap   <silent>   <F7>    :FloatermNew<CR>
+tnoremap   <silent>   <F7>    <C-\><C-n>:FloatermNew<CR>
+nnoremap   <silent>   <F8>    :FloatermPrev<CR>
+tnoremap   <silent>   <F8>    <C-\><C-n>:FloatermPrev<CR>
+nnoremap   <silent>   <F9>    :FloatermNext<CR>
+tnoremap   <silent>   <F9>    <C-\><C-n>:FloatermNext<CR>
+nnoremap   <silent>   <F12>   :FloatermToggle<CR>
+tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermToggle<CR>
+" To simulate i_CTRL-R in terminal-mode:
+tnoremap   <expr>     <C-R>   '<C-\><C-N>"'.nr2char(getchar()).'pi'
