@@ -1,4 +1,7 @@
 *~
 .syntastic_c_config
 .neovim.pipe
+.ccls-cache/
 compile_commands.json
+.mypy_cache/
+.flake8
