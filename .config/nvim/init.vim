@@ -26,10 +26,31 @@ Plug 'dense-analysis/ale'
 Plug 'mbbill/undotree'
 
 " NeoSolarized
-Plug 'overcache/NeoSolarized'
+"Plug 'overcache/NeoSolarized'
+" Solarized
+Plug 'ishan9299/nvim-solarized-lua'
+
+"testing part
+"firenvim
+"Plug 'glacambre/firenvim'
 
 " floating terminal
 Plug 'voldikss/vim-floaterm'
+
+"tree-sitter
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': 'TSUpdate' }
+
+" supercollider
+Plug 'supercollider/scvim'
+
+" autopairs
+" Plug 'windwp/nvim-autopairs'
+
+" transfert
+Plug 'coffebar/transfer.nvim'
+
+" auto sudo
+Plug 'lambdalisue/suda.vim'
 
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
@@ -91,6 +112,8 @@ nnoremap k gk
 set splitbelow          " Horizontal split below current.
 set splitright          " Vertical split to right of current.
 
+set colorcolumn=+1,80,100
+
 set list
 "set listchars=tab:▸\ ,eol:¬
 "set listchars=tab:▸\ ,trail:▓
@@ -98,7 +121,8 @@ set listchars=tab:▸\ ,trail:▓,extends:>,precedes:<,nbsp:+
 
 nnoremap <F5> :UndotreeToggle<CR>
 
-colorscheme NeoSolarized
+colorscheme solarized
+
 set background=dark
 
 "http://stackoverflow.com/questions/1005/getting-root-permissions-on-a-file-inside-of-vi
@@ -151,7 +175,7 @@ endfunction
 
 " Restore and save sessions.
 autocmd VimEnter * nested call RestoreSession(v:servername)
-autocmd VimLeave * call SaveSession(v:servername)
+autocmd VimLeave * nested call SaveSession(v:servername)
 "end
 "
 " Set tab size as I expect
@@ -170,12 +194,26 @@ set cinoptions=:0,l1,t0,g0,(0
 "open from current  file directory
 map <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
+" for our weekly utf8 bullet
+autocmd Filetype text setlocal comments+=fb:•
+" for our weekly specific testwid(th
+autocmd BufRead,BufNewFile /local/starkl/TODO/* setlocal textwidth=70
+"autocmd BufRead,BufNewFile /local/starkl/TODO/* setlocal filetype=rst
+
+
+"disable linter for C,C++ files
+autocmd Filetype c ALEDisableBuffer
+autocmd Filetype cpp ALEDisableBuffer
+autocmd Filetype asm ALEDisableBuffer
+
 let local_init=stdpath("config") ."/init." . substitute(system("hostname"), '\n', '', '') . ".vim"
 if filereadable(local_init)
 	execute "source" . local_init
 end
 
+"set efm=%A%trror (%m),%+P%f:%r,  line%l: %m
 set clipboard+=unnamed
+
 
 "FloatTerm
 nnoremap   <silent>   <F7>    :FloatermNew<CR>
@@ -189,11 +227,101 @@ tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermToggle<CR>
 " To simulate i_CTRL-R in terminal-mode:
 tnoremap   <expr>     <C-R>   '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
-function! SshTo(...)
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all" (the five listed parsers should always be installed)
+  ensure_installed = { "c", "python", "vim", "lua", "bash", "query",
+                       "git_config",  "gitignore", "git_rebase", "gitcommit"},
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- Automatically install missing parsers when entering buffer
+  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+  auto_install = true,
+
+  -- List of parsers to ignore installing (or "all")
+  -- ignore_install = { "javascript" },
+
+  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+
+  highlight = {
+    enable = true,
+
+    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+    -- the name of the parser)
+    -- list of language that will be disabled
+    -- disable = { "c", "rust" },
+    -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
+    -- disable = function(lang, buf)
+    --    local max_filesize = 100 * 1024 -- 100 KB
+    --    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+    --    if ok and stats and stats.size > max_filesize then
+    --        return true
+    --    end
+    -- end,
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
+
+"" autopairs
+"lua << EOF
+"
+"local npairs = require("nvim-autopairs")
+"
+"-- Expand pair only on enter key
+"local Rule = require('nvim-autopairs.rule')
+"npairs.setup {}
+"
+"npairs.clear_rules()
+"
+"for _,bracket in pairs { { '(', ')' }, { '[', ']' }, { '{', '}' } } do
+"  npairs.add_rules {
+"    Rule(bracket[1], bracket[2])
+"      :end_wise(function() return true end)
+"  }
+"end
+"EOF
+
+" tranfer
+lua << EOF
+      require("transfer").setup({
+        -- opts
+      })
+EOF
+
+
+function! SshTo(dest, ...)
     augroup ssh
     autocmd! ssh
-    for arg in a:000
-        let l:autocmd_str = "autocmd ssh BufWritePost * silent! execute '! scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no % root@" . arg . ":/home/root/'"
+    let args = a:000[0:]
+    for arg in args
+        let l:autocmd_str = "autocmd ssh BufWritePost * silent! execute '! scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no % root@" . arg . ":" . a:dest . "'"
+        "let l:autocmd_str = "autocmd ssh BufWritePost * silent! jobstart('scp % " . arg . ":" . a:dest . "', {'detach' : v:true})"
+        echo l:autocmd_str
         execute l:autocmd_str
     endfor
 endfunction
+
+function! RsyncTo(src, dest, ...)
+    augroup rsync
+    autocmd! rsync
+    let args = a:000[0:]
+    for arg in args
+        let l:autocmd_str = "autocmd rsync BufWritePost * silent! execute '! rsync --exclude=host_tools/ -av " . a:src . " " . arg . ":" . a:dest . "'"
+        "let l:autocmd_str = "autocmd rsync BufWritePost * silent! jobstart('scp % " . arg . ":" . a:dest . "', {'detach' : v:true})"
+        echo l:autocmd_str
+        execute l:autocmd_str
+    endfor
+endfunction
+
+" sudo
+"let g:suda_smart_edit = 1
