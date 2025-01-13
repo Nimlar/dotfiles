@@ -1,0 +1,37 @@
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Numpad0"
+mods = "Control"
+
+[bell]
+animation = "EaseOutExpo"
+color = "#ffffff"
+duration = 100
+
+[cursor]
+unfocused_hollow = true
+
+[cursor.style]
+blinking = "Always"
+shape = "Block"
+
+[font]
+size = 10.0
+
+[font.bold]
+style = "Bold"
+
+[font.bold_italic]
+style = "Bold Italic"
+
+[font.italic]
+style = "Italic"
+
+[font.normal]
+family = "Source Code Pro"
+style = "Medium"
+
+[window]
+decorations = "none"
+
+[keyboard]
