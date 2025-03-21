@@ -9,10 +9,19 @@
 	cmd = meld --diff $LOCAL $MERGED $REMOTE --diff $BASE $LOCAL --diff $BASE $REMOTE
 [mergetool "mymeld"]
 	cmd = meld $LOCAL $BASE $REMOTE -o $MERGED --diff $BASE $LOCAL --diff $BASE $REMOTE --auto-merge
+[mergetool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'"[diff]
 [diff]
 	tool = meld
+	algorithm = histogram
+	mnemonicPrefix = true
+	renames = true
+	colorMoved = plain
+	#tool = vimdiff
 [diff "meld"]
-	command = meld
+    command = meld
+[difftool]
+    prompt = false
 [core]
 	excludesfile = ~/.config/git/ignore
 	editor = vim
@@ -30,7 +39,17 @@
 	autosquash = true
 [rerere]
 	enabled = true
+    autoupdate = true
 [help]
 	autocorrect = 15
 [pull]
 	rebase = true
+[tag]
+    sort = version:refname
+[commit]
+    verbose = true
+
+#[column]
+#	ui = auto
+[branch]
+	sort = -committerdate
