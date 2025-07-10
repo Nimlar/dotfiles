@@ -1,5 +1,5 @@
 [general]
 import = [
-    "/local/home/toromano/.config/alacritty/alacritty-theme/themes/solarized_light.toml",
-    "/local/home/toromano/.config/alacritty/common.toml"
+    "~/.config/alacritty/alacritty-theme/themes/solarized_light.toml",
+    "~/.config/alacritty/common.toml"
 ]
