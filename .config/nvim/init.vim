@@ -61,6 +61,10 @@ Plug 'github/copilot.vim', { 'tag': 'v1.43.0' }
 " of space)
 " Plug 'lukas-reineke/indent-blankline.nvim'
 
+"  https://github.com/CopilotC-Nvim/CopilotChat.nvim
+Plug 'nvim-lua/plenary.nvim'
+Plug 'CopilotC-Nvim/CopilotChat.nvim'
+
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
@@ -393,3 +397,8 @@ endfunction
 
 " sudo
 "let g:suda_smart_edit = 1
+
+" https://github.com/CopilotC-Nvim/CopilotChat.nvim
+lua << EOF
+require("CopilotChat").setup()
+EOF
