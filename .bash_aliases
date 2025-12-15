@@ -145,3 +145,9 @@ function ccwait(){
   done
   beep
 }
+
+#atuin
+function histg() {
+    # atuin search  --format "{time} - [{duration}] - {directory}$\t{command}" | grep "$@"
+    atuin search  --format "{time} - {directory}$\t{command}" | grep "$@"
+}
