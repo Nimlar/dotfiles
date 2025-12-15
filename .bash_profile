@@ -24,10 +24,6 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-if [ -d "$HOME/.cargo/bin" ] ; then
-    PATH="$HOME/.cargo/bin:$PATH"
-fi
-
 # Set MANPATH so it includes users' private man if it exists
 # if [ -d ~/man ]; then
 #   MANPATH="~/man:${MANPATH}"
