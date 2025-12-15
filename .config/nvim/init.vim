@@ -52,6 +52,10 @@ Plug 'coffebar/transfer.nvim'
 " auto sudo
 Plug 'lambdalisue/suda.vim'
 
+" ibl => may need a better configuration I am missing when tab are use instead
+" of space)
+" Plug 'lukas-reineke/indent-blankline.nvim'
+
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
@@ -292,6 +296,51 @@ EOF
 "      :end_wise(function() return true end)
 "  }
 "end
+"EOF
+
+"
+" indent_blankline
+"lua << EOF
+"local highlight = {
+"    "CursorColumn",
+"    "Whitespace",
+"}
+"require("ibl").setup {
+"    indent = { highlight = highlight,
+"              char = " ",
+"              },
+"    whitespace = {
+"        highlight = highlight,
+"        remove_blankline_trail = false,
+"    },
+"    scope = { enabled = true,
+"              char = "│",
+"           -- char = "▏",
+"           -- char = "⎸",
+"           -- char = "⎢"
+"           -- char = "▏",
+"           -- char = "⎢",
+"              },
+"
+"}
+"local hooks = require("ibl.hooks")
+"hooks.register(hooks.type.VIRTUAL_TEXT, function(_, bufnr, row, virt_text)
+"    local config = require("ibl.config").get_config(bufnr)
+"    local line = vim.api.nvim_buf_get_lines(bufnr, row, row + 1, false)[1]
+"    if line == "" then
+"        for _, v in ipairs(virt_text) do
+"            if v[1] == config.scope.char then
+"                v[1] = "┊"
+"            --    v[1] = "┆"
+"            end
+"            if v[1] == "▸" then
+"                v[1] = " "
+"            end
+"
+"        end
+"    end
+"    return virt_text
+"end)
 "EOF
 
 " tranfer
