@@ -228,7 +228,7 @@ tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermToggle<CR>
 tnoremap   <expr>     <C-R>   '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
 lua << EOF
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
   ensure_installed = { "c", "python", "vim", "lua", "bash", "query",
                        "git_config",  "gitignore", "git_rebase", "gitcommit"},
@@ -268,6 +268,9 @@ require'nvim-treesitter.configs'.setup {
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
+  },
+  indent = {
+    enable = true
   },
 }
 EOF
