@@ -402,3 +402,5 @@ endfunction
 lua << EOF
 require("CopilotChat").setup()
 EOF
+
+set termguicolors
