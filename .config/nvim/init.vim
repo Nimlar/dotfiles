@@ -52,6 +52,11 @@ Plug 'coffebar/transfer.nvim'
 " auto sudo
 Plug 'lambdalisue/suda.vim'
 
+"Plug 'zbirenbaum/copilot.lua'
+" or
+Plug 'github/copilot.vim', { 'tag': 'v1.43.0' }
+" from  1.44.0 need node.js > 20.x ! but 20.x need newe gcc :-(
+
 " ibl => may need a better configuration I am missing when tab are use instead
 " of space)
 " Plug 'lukas-reineke/indent-blankline.nvim'
@@ -297,6 +302,15 @@ EOF
 "  }
 "end
 "EOF
+
+"" Copilot.lua
+"lua << EOF
+"    require("copilot").setup({})
+"EOF
+"" Copilot vim
+let g:copilot_workspace_folders = ["~/git/default_project"]
+"let g:copilot_proxy = ""
+"let g:copilot_proxy_strict_ssl = v:false
 
 "
 " indent_blankline
