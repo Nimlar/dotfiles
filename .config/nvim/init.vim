@@ -363,9 +363,11 @@ function! SshTo(dest, ...)
     endfor
 endfunction
 
-function! RsyncTo(src, dest, ...)
+function! RsyncTo(src, dest, reinit, ...)
     augroup rsync
-    autocmd! rsync
+    if a:reinit
+        autocmd! rsync
+    endif
     let args = a:000[0:]
     for arg in args
         let l:autocmd_str = "autocmd rsync BufWritePost * silent! execute '! rsync --exclude=host_tools/ -av " . a:src . " " . arg . ":" . a:dest . "'"
