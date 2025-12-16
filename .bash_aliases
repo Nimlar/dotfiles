@@ -43,7 +43,7 @@ function unbuildprompt(){
 }
 
 function check_pre(){
-	for i in "${!preexec_functions[@]}"
+	for i in "${!preexec_functions[@]:-}"
 	do
 		echo "preexec_functions[$i]: ${preexec_functions[$i]}"
 		[ -n "$1" ] &&  type "${preexec_functions[$i]}" |& sed 's/^/  /'
@@ -144,4 +144,10 @@ function ccwait(){
     echo "$i ticks ellapsed, remain $(( nb - i )) * $t min"
   done
   beep
+}
+
+#atuin
+function histg() {
+    # atuin search  --format "{time} - [{duration}] - {directory}$\t{command}" | grep "$@"
+    atuin search  --format "{time} - {directory}$\t{command}" | grep "$@"
 }

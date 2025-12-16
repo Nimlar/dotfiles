@@ -52,6 +52,19 @@ Plug 'coffebar/transfer.nvim'
 " auto sudo
 Plug 'lambdalisue/suda.vim'
 
+"Plug 'zbirenbaum/copilot.lua'
+" or
+Plug 'github/copilot.vim', { 'tag': 'v1.43.0' }
+" from  1.44.0 need node.js > 20.x ! but 20.x need newe gcc :-(
+
+" ibl => may need a better configuration I am missing when tab are use instead
+" of space)
+" Plug 'lukas-reineke/indent-blankline.nvim'
+
+"  https://github.com/CopilotC-Nvim/CopilotChat.nvim
+Plug 'nvim-lua/plenary.nvim'
+Plug 'CopilotC-Nvim/CopilotChat.nvim'
+
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
@@ -228,7 +241,7 @@ tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermToggle<CR>
 tnoremap   <expr>     <C-R>   '<C-\><C-N>"'.nr2char(getchar()).'pi'
 
 lua << EOF
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
   ensure_installed = { "c", "python", "vim", "lua", "bash", "query",
                        "git_config",  "gitignore", "git_rebase", "gitcommit"},
@@ -269,6 +282,9 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+  indent = {
+    enable = true
+  },
 }
 EOF
 
@@ -291,6 +307,60 @@ EOF
 "end
 "EOF
 
+"" Copilot.lua
+"lua << EOF
+"    require("copilot").setup({})
+"EOF
+"" Copilot vim
+let g:copilot_workspace_folders = ["~/git/default_project"]
+"let g:copilot_proxy = ""
+"let g:copilot_proxy_strict_ssl = v:false
+
+"
+" indent_blankline
+"lua << EOF
+"local highlight = {
+"    "CursorColumn",
+"    "Whitespace",
+"}
+"require("ibl").setup {
+"    indent = { highlight = highlight,
+"              char = " ",
+"              },
+"    whitespace = {
+"        highlight = highlight,
+"        remove_blankline_trail = false,
+"    },
+"    scope = { enabled = true,
+"              char = "│",
+"           -- char = "▏",
+"           -- char = "⎸",
+"           -- char = "⎢"
+"           -- char = "▏",
+"           -- char = "⎢",
+"              },
+"
+"}
+"local hooks = require("ibl.hooks")
+"hooks.register(hooks.type.VIRTUAL_TEXT, function(_, bufnr, row, virt_text)
+"    local config = require("ibl.config").get_config(bufnr)
+"    local line = vim.api.nvim_buf_get_lines(bufnr, row, row + 1, false)[1]
+"    if line == "" then
+"        for _, v in ipairs(virt_text) do
+"            if v[1] == config.scope.char then
+"                v[1] = "┊"
+"            --    v[1] = "┆"
+"            end
+"            if v[1] == "▸" then
+"                v[1] = " "
+"            end
+"
+"        end
+"    end
+"    return virt_text
+"end)
+"EOF
+
 " tranfer
 lua << EOF
       require("transfer").setup({
@@ -311,9 +381,11 @@ function! SshTo(dest, ...)
     endfor
 endfunction
 
-function! RsyncTo(src, dest, ...)
+function! RsyncTo(src, dest, reinit, ...)
     augroup rsync
-    autocmd! rsync
+    if a:reinit
+        autocmd! rsync
+    endif
     let args = a:000[0:]
     for arg in args
         let l:autocmd_str = "autocmd rsync BufWritePost * silent! execute '! rsync --exclude=host_tools/ -av " . a:src . " " . arg . ":" . a:dest . "'"
@@ -325,3 +397,10 @@ endfunction
 
 " sudo
 "let g:suda_smart_edit = 1
+
+" https://github.com/CopilotC-Nvim/CopilotChat.nvim
+lua << EOF
+require("CopilotChat").setup()
+EOF
+
+set termguicolors
