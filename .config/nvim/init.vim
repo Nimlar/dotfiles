@@ -54,8 +54,7 @@ Plug 'lambdalisue/suda.vim'
 
 "Plug 'zbirenbaum/copilot.lua'
 " or
-Plug 'github/copilot.vim', { 'tag': 'v1.43.0' }
-" from  1.44.0 need node.js > 20.x ! but 20.x need newe gcc :-(
+Plug 'github/copilot.vim'
 
 " ibl => may need a better configuration I am missing when tab are use instead
 " of space)
