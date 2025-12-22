@@ -108,15 +108,23 @@ beep_chkerr() { if test $? -eq 0; then beep ; else beep_error ; fi; }
 
 #tag() { echo "awful.tag.selected().name=\"$1\"" |  awesome-client ; }
 tag() {
-   if [ $# -eq 1 ]; then
-      echo -e "awful = require(\"awful\")\nawful.tag.selected().name=\"$1\"" |  awesome-client ;
-   fi
-   if [ $# -eq 2 ]; then
-      echo -e "tags[mouse.screen][$2].name=\"$1\"" |  awesome-client ;
-   fi
-   if [ $# -eq 3 ]; then
-       echo -e  "tags[$3][$2].name=\"$1\"" |  awesome-client ;
-   fi
+    if [ -z "$NIRI_SOCKET" ];then
+        if [ $# -eq 1 ]; then
+            echo -e "awful = require(\"awful\")\nawful.tag.selected().name=\"$1\"" |  awesome-client ;
+        fi
+        if [ $# -eq 2 ]; then
+            echo -e "tags[mouse.screen][$2].name=\"$1\"" |  awesome-client ;
+        fi
+        if [ $# -eq 3 ]; then
+            echo -e  "tags[$3][$2].name=\"$1\"" |  awesome-client ;
+        fi
+    else
+        if [ $# -eq 0 ]; then
+            niri msg action unset-workspace-name
+        else
+            niri msg action set-workspace-name "$1" ${2:+--workspace "$2"}
+        fi
+    fi
 }
 
 # management of .files in git
