@@ -1,0 +1,24 @@
+[Unit]
+Description="Wayland idle lock using waylock and swayidle"
+# Start after the graphical session bus is up
+PartOf=graphical-session.target
+After=graphical-session.target
+Requisite=graphical-session.target
+
+[Service]
+Type=simple
+# Run swayidle to manage idle + pre-lock notification
+ExecStart=/usr/bin/swayidle -w \
+    timeout 1000 'niri msg action power-off-monitors' \
+    timeout 600 'swaylock' resume 'notify-send --wait --expire-time=3000 "Welcome back"' \
+    timeout 550 'notify-send --wait --expire-time=10000 "Screen saver will start"' \
+    before-sleep 'swaylock'
+
+# Prevent multiple copies
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+
+# systemctl --user daemon-reload && systemctl --user restart swayidle
+# systemctl --user restart swaylock-idle.service
