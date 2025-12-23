@@ -218,11 +218,6 @@ autocmd Filetype c ALEDisableBuffer
 autocmd Filetype cpp ALEDisableBuffer
 autocmd Filetype asm ALEDisableBuffer
 
-let local_init=stdpath("config") ."/init." . substitute(system("hostname"), '\n', '', '') . ".vim"
-if filereadable(local_init)
-	execute "source" . local_init
-end
-
 "set efm=%A%trror (%m),%+P%f:%r,  line%l: %m
 set clipboard+=unnamed
 
@@ -403,3 +398,9 @@ require("CopilotChat").setup()
 EOF
 
 set termguicolors
+
+" local config could overide some settings
+let local_init=stdpath("config") ."/local." . substitute(system("hostname"), '\n', '', '') . ".vim"
+if filereadable(local_init)
+	execute "source" . local_init
+end
