@@ -12,6 +12,8 @@
 //        "niri/scratchpad",
         "custom/media",
         "cffi/niri-taskbar"
+//        "wrl/taskbar"
+
     ],
     "cffi/niri-taskbar": {
         "module_path": "/media/disk2/dev/niri_wm/niri-taskbar/target/release/libniri_taskbar.so",
@@ -57,7 +59,7 @@
     // },
     "keyboard-state": {
         "numlock": true,
-        "capslock": true,
+        "capslock": false,
         "format": "{name} {icon}",
         "format-icons": {
             "locked": "",
@@ -106,9 +108,29 @@
         // }
     },
     "clock": {
+        "timezone": "Europe/Paris",
+        "locale": "fr_FR.UTF-8",
         // "timezone": "America/New_York",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format": "{:L%a %d %b %Y   %H:%M}",
+        "tooltip-format": "<tt>  {calendar}</tt>",
+        "calendar": {
+            "weeks-pos"     : "none",
+            "on-scroll"     : 1,
+            "format": {
+                "months":     "<span color='#8fbcbb'><b>{}</b></span>",
+                "days":       "<span color='#8a909e'>{}</span>",
+                "weeks":      "<span color='#7851a9'><b>W{:%U}</b></span>",
+                "weekdays":   "<span color='#81a1c1'><b>{}</b></span>",
+                "today":      "<span color='#6c5280'><b>{}</b></span>"
+            }
+        },
+        "actions":  {
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        },
+        "format-alt": "{:L%A %d %B %Y   %H:%M}"
     },
     "cpu": {
         "format": "{usage}% ",
