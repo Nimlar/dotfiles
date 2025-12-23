@@ -30,7 +30,8 @@ font-size=24
 
 
 # background
-color=002b36
+# Use Base03 color
+color=002b36ff
 
 # layout
 # use Base0 color
