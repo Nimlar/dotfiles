@@ -1,0 +1,78 @@
+# global info
+daemonize
+show-failed-attempts
+ignore-empty-password
+indicator-caps-lock
+show-keyboard-layout
+font='Source Code Pro'
+font-size=24
+
+# =========================
+#  Solarized Dark for swaylock
+# =========================
+# Palette reference (Solarized Dark):
+#   Base03  #002b36  (background)
+#   Base02  #073642  (background highlights)
+#   Base01  #586e75
+#   Base00  #657b83
+#   Base0   #839496
+#   Base1   #93a1a1
+#   Base2   #eee8d5
+#   Base3   #fdf6e3
+#   Yellow  #b58900
+#   Orange  #cb4b16
+#   Red     #dc322f
+#   Magenta #d33682
+#   Violet  #6c71c4
+#   Blue    #268bd2
+#   Cyan    #2aa198
+#   Green   #859900
+
+
+# background
+color=002b36
+
+# layout
+# use Base0 color
+layout-bg-color=00000000
+layout-text-color=839496
+
+# indicator
+indicator-radius=80
+indicator-thickness=10
+
+# normal info
+# Use Base0 color
+inside-color=00000000
+line-color=839496
+ring-color=839496
+text-color=839496
+
+# Segment Higthlited when key pressed
+# Use Base02 color
+key-hl-color=073642
+# Segment Higthlited backspace pressed
+# Use Base01 color
+bs-hl-color=586e75
+
+# clear info: Blue
+inside-clear-color=00000000
+line-clear-color=268bd2
+ring-clear-color=268bd2
+text-clear-color=268bd2
+
+# verify info: Yellow
+inside-ver-color=00000000
+line-ver-color=b58900
+ring-ver-color=b58900
+text-ver-color=b58900
+
+# wrong info: Red
+inside-wrong-color=00000000
+line-wrong-color=dc322f
+ring-wrong-color=dc322f
+text-wrong-color=dc322f
+
+# caps lock info: Orange
+inside-caps-lock-color=00000000
+line-caps-lock-color=cb4b16
