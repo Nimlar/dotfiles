@@ -81,6 +81,11 @@ xterm*)
         }
 #    fi
     ;;
+alacritty)
+        function title() {
+            echo -ne "\\033]0;${PWD/$HOME/'~'}\\007"
+        }
+    ;;
 *)
     ;;
 esac
