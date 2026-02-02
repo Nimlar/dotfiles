@@ -266,7 +266,7 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "~/dev/niri_wm/waybar/build/waybar"
+// spawn-at-startup "~/dev/niri_wm/waybar/build/waybar"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
