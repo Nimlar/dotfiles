@@ -134,17 +134,7 @@ fi
 #export LANG="en_US.UTF-8" 
 
 # add Solarized option
-case "$TERM" in
-xterm*|terminator)
-    DIRCOLOR=$(dircolors ~/.dircolors/dircolors.256dark 2>/dev/null)
-    if [ -z "$DIRCOLOR" ]; then
-            DIRCOLOR=$(dircolors ~/.dircolors/dircolors.older.256dark)
-    fi
-    eval "$DIRCOLOR"
-    ;;
-*)
-    ;;
-esac
+eval $(dircolors ~/.config/dircolors/dircolors.256dark 2>/dev/null)
 
 # add completion in python shell
 export PYTHONSTARTUP=$HOME/.pythonrc.py
