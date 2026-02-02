@@ -328,3 +328,14 @@ label:focus {
 #privacy-item.audio-out {
     background-color: #268bd2; /* blue */
 }
+
+.taskbar-button-workspace {
+    margin: 0;
+    padding: 2px 4px;
+    border-radius: 0;
+    color:  #839496; /* base0 */
+    background:  inherit;
+    border: none;
+    border-left: 1px solid #839496; /* base0 */;
+    box-shadow: none;
+}

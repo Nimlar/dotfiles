@@ -7,7 +7,7 @@
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
-        "niri/workspaces",
+//        "niri/workspaces",
 //        "niri/mode",
 //        "niri/scratchpad",
         "custom/media",
@@ -18,6 +18,7 @@
     "cffi/niri-taskbar": {
         "module_path": "/media/disk2/dev/niri_wm/niri-taskbar/target/release/libniri_taskbar.so",
 //        "notifications": true,
+        "display_mode": "workspace_buttons",
     },
     "modules-center": [
         "niri/window"
