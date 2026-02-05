@@ -11,7 +11,6 @@ Type=simple
 ExecStart=/usr/bin/swayidle -w \
     timeout 1000 'niri msg action power-off-monitors' \
     timeout 600 'swaylock' resume 'notify-send --wait --expire-time=3000 "Welcome back"' \
-    timeout 550 'notify-send --wait --expire-time=10000 "Screen saver will start"' \
     before-sleep 'swaylock'
 
 # Prevent multiple copies
