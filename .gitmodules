@@ -10,3 +10,12 @@
 [submodule ".config/alacritty/alacritty-theme"]
 	path = .config/alacritty/alacritty-theme
 	url = https://github.com/alacritty/alacritty-theme.git
+[submodule "src/niri_wm/niri"]
+	path = src/niri_wm/niri
+	url = https://github.com/YaLTeR/niri.git
+[submodule "src/niri_wm/niri-taskbar"]
+	path = src/niri_wm/niri-taskbar
+	url = https://github.com/Nimlar/niri-taskbar.git
+[submodule "src/niri_wm/waybar"]
+	path = src/niri_wm/waybar
+	url = https://github.com/Alexays/Waybar
